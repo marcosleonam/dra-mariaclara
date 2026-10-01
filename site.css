@@ -1,0 +1,157 @@
+/* ==========================================================================
+   Dra. Maria Clara — camada do site sobre o Grotesk Zero (grotesk.css)
+   Paleta tirada do Instagram dela (carrosséis educativos + logo):
+     creme #fbf3ec · vinho #4a2328 · terracota #c0574a · ocre #db9a3a
+     blush #f2d6d0 · sálvia #9fc3ba
+   ========================================================================== */
+
+html{scroll-behavior:auto}
+body{font-variation-settings:'wdth' 100}
+.vr{color:var(--verm)}
+.hero-title .ch{color:var(--ink)}
+.hero-title .row.thin .ch{color:var(--verm)}
+
+/* --------- hero: foto da doutora no lugar do "bed" --------- */
+.hero-photo{position:absolute;right:3.2vw;top:14vh;bottom:8vh;width:25vw;z-index:1;margin:0;
+  overflow:hidden;background:var(--blush);opacity:0;clip-path:inset(100% 0 0 0)}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(74,35,40,.45))}
+.hero-photo figcaption{position:absolute;left:14px;bottom:12px;z-index:2;color:#fff;
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.hero-title{max-width:68vw}
+@media(min-width:761px){.hero-title .ch{font-size:clamp(44px,8.3vw,132px)}.hero-sub{max-width:min(430px,40vw)}}
+.hero-meta{right:auto;left:3.2vw;bottom:5vh;text-align:left}
+.hero-meta b{color:var(--verm)}
+.hero-cta{position:relative;z-index:2;margin-top:3.5vh;display:inline-flex;align-items:center;gap:14px;
+  width:max-content;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  background:var(--ink);color:var(--bone);padding:16px 24px;opacity:0;transform:translateY(20px);
+  transition:background .3s var(--ease)}
+.hero-cta:hover{background:var(--verm)}
+.hero-cta span{transition:transform .35s var(--ease)}
+.hero-cta:hover span{transform:translateX(6px)}
+@media(max-width:760px){
+  .hero{justify-content:flex-start;padding-top:190px;height:auto;min-height:100svh;padding-bottom:0}
+  .hero-title{max-width:none}
+  .hero-meta{display:none}
+  .hero-sub{font-size:15px}
+  .hero-photo{position:relative;inset:auto;width:calc(100% + 6.4vw);margin:5vh -3.2vw 0;height:62vh;order:9}
+  .hero{padding-top:150px}
+}
+
+/* --------- faixas --------- */
+.ribbon.r1 span{color:var(--ink)}
+.ribbon.r2 span{-webkit-text-stroke:1px var(--verm)}
+
+/* --------- eixo "CRESCER" --------- */
+#zeroWord{font-size:clamp(64px,15vw,240px)}
+#railTick{background:var(--ochre)}
+
+/* --------- consultas (linhas de licença) --------- */
+.lic-row{color:inherit}
+.lic-row .price{font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.16em;color:var(--verm)}
+.lic-row:hover h3{color:var(--verm)}
+.lic-row h3{transition:color .3s var(--ease)}
+.license .head h2,.features .feat-head h2,.faq .head h2,.local .head h2,.about h2{font-weight:900;
+  font-size:clamp(26px,3.4vw,44px);letter-spacing:-.02em}
+.license .head{flex-wrap:wrap;gap:12px}
+.guide{padding-top:6vh}
+.guide .lic-row .price{color:var(--ochre)}
+
+/* --------- sobre --------- */
+.about{background:var(--blush);padding:16vh 3.2vw;display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw;align-items:center}
+.about-photo{position:relative;margin:0;overflow:hidden;aspect-ratio:4/5;background:var(--bone)}
+.about-photo img{width:100%;height:100%;object-fit:cover}
+.about-photo .num{position:absolute;right:14px;top:12px;z-index:2;color:var(--bone);font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+.about-photo .cap{position:absolute;left:14px;bottom:12px;z-index:2;color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase}
+.about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(74,35,40,.4))}
+.about-text .mono{display:block;margin-bottom:3vh}
+.about-text h2{margin-bottom:4vh}
+.about-text p{font-size:clamp(16px,1.25vw,19px);line-height:1.65;color:rgba(74,35,40,.82);max-width:620px;margin-bottom:2.4vh}
+.about-rows{margin-top:5vh;max-width:620px}
+.about-rows .led-row,.local .led-row{border-bottom:1px solid var(--hair-ink)}
+.about-rows .led-row .k,.local .led-row .k{color:rgba(74,35,40,.55)}
+.about-rows .led-row .v,.local .led-row .v{font-size:clamp(15px,1.4vw,20px);text-align:right}
+@media(max-width:900px){.about{grid-template-columns:1fr}.about-photo{max-width:440px}}
+
+/* --------- o que acompanho --------- */
+.features{padding-top:14vh}
+.feat-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6vh;gap:12px;flex-wrap:wrap}
+.feat-row .idx{color:var(--verm)}
+
+/* --------- galeria --------- */
+#inuse .head{flex-wrap:wrap;gap:12px}
+#inuse .head h2{font-weight:900;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.02em}
+.frame{display:block}
+.frame img{filter:none}
+.frame .num{color:var(--bone)}
+@media(max-width:760px){.track{height:66vh}.frame{height:56vh}}
+
+/* --------- interlúdio: foto dentro das letras --------- */
+.interlude img{filter:saturate(.7) brightness(.55)}
+.interlude::before{background:linear-gradient(180deg,rgba(61,29,34,.35),rgba(61,29,34,.62) 36%,rgba(61,29,34,.62) 66%,rgba(61,29,34,.35))}
+.interlude .knock span{font-size:clamp(40px,8.6vw,138px)}
+@supports (-webkit-background-clip:text){
+  .interlude .knock .fill span{background-image:url("fotos/dra-retrato.webp")}
+  .interlude .knock .fill span:nth-child(1){background-position:50% 30%}
+  .interlude .knock .fill span:nth-child(2){background-position:50% 42%}
+  .interlude .knock .fill span:nth-child(3){background-position:50% 54%}
+}
+
+/* --------- números + depoimentos --------- */
+.ledger .v{text-align:right}
+.quote{border-top:1px solid var(--hair-bone);padding:4vh 0}
+.quote p{font-weight:700;font-size:clamp(20px,2.1vw,30px);line-height:1.25;letter-spacing:-.01em}
+.quote cite{display:block;margin-top:2.4vh;font-style:normal;color:var(--ochre)}
+
+/* --------- dúvidas --------- */
+.faq{background:var(--bone);padding:12vh 3.2vw 14vh}
+.faq .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6vh;gap:12px;flex-wrap:wrap}
+.faq-row{border-top:1px solid var(--hair-ink)}
+.faq-row:last-of-type{border-bottom:1px solid var(--hair-ink)}
+.faq-row summary{list-style:none;display:grid;grid-template-columns:60px 1fr 40px;gap:3vw;align-items:center;padding:30px 0;cursor:pointer}
+.faq-row summary::-webkit-details-marker{display:none}
+.faq-row .idx{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--verm)}
+.faq-row h3{font-weight:700;font-size:clamp(18px,2.2vw,28px);letter-spacing:-.01em}
+.faq-row i{font-style:normal;font-size:28px;font-weight:300;justify-self:end;transition:transform .35s var(--ease);color:var(--verm)}
+.faq-row[open] i{transform:rotate(45deg)}
+.faq-row p{padding:0 0 30px calc(60px + 3vw);max-width:900px;font-size:clamp(15px,1.2vw,18px);line-height:1.65;color:rgba(74,35,40,.8)}
+@media(max-width:760px){.faq-row summary{grid-template-columns:32px 1fr 28px}.faq-row p{padding-left:0}}
+
+/* --------- local --------- */
+.local{background:var(--bone);padding:4vh 3.2vw 16vh}
+.local .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6vh;gap:12px;flex-wrap:wrap}
+.local-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5vw;align-items:stretch}
+.map{min-height:360px;background:var(--blush);overflow:hidden}
+.map iframe{width:100%;height:100%;min-height:360px;border:0;filter:sepia(.25) saturate(.8)}
+@media(max-width:900px){.local-grid{grid-template-columns:1fr}}
+
+/* --------- rodapé --------- */
+.foot-mark .fch{color:var(--bone)}
+.foot-cols a{text-decoration:underline;text-underline-offset:3px}
+
+/* --------- barra fixa de WhatsApp (só celular) --------- */
+.wa-bar{display:none}
+@media(max-width:760px){
+  .wa-bar{display:flex;justify-content:center;align-items:center;position:fixed;left:12px;right:12px;bottom:12px;z-index:75;
+    background:var(--verm);color:var(--bone);padding:16px;font-size:12px;letter-spacing:.18em;
+    box-shadow:0 12px 30px -10px rgba(74,35,40,.6);transform:translateY(140%);transition:transform .45s var(--ease)}
+  .wa-bar.on{transform:none}
+  footer{padding-bottom:12vh}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero-photo{opacity:1;clip-path:none}
+  .hero-cta{opacity:1;transform:none}
+}
+
+/* --------- portal: frase "mil dias" (legível no celular, com destaque) --------- */
+.portal-line{white-space:normal;width:min(92vw,900px);text-align:center;top:46%;
+  display:flex;flex-direction:column;align-items:center;gap:1.6vh;font-family:var(--arch);text-transform:none;letter-spacing:0}
+.portal-line .pl-a,.portal-line .pl-c{font-size:clamp(13px,1.5vw,18px);letter-spacing:.22em;color:rgba(251,243,236,.85)}
+.portal-line .pl-b{font-weight:900;font-size:clamp(64px,13vw,190px);line-height:.86;letter-spacing:-.035em;
+  color:var(--ochre);text-transform:uppercase}
+@media(max-width:760px){
+  .portal-line .pl-a,.portal-line .pl-c{font-size:14px;letter-spacing:.16em}
+  .portal-line .pl-b{font-size:21vw}
+  .portal-eyebrow{font-size:12px}
+}

@@ -1,0 +1,329 @@
+:root{
+--bone:#fbf3ec; --ink:#4a2328; --verm:#c0574a; --ochre:#db9a3a; --blush:#f2d6d0; --sage:#9fc3ba; --stage:#3d1d22;
+--hair-ink:rgba(74,35,40,.16); --hair-bone:rgba(251,243,236,.18);
+--mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+--arch:'Archivo','Helvetica Neue',Arial,sans-serif;
+--ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+html,body{overflow-x:clip}
+body{
+background:var(--bone); color:var(--ink); font-family:var(--arch);
+-webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+::selection{background:var(--verm);color:var(--bone)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;background:none;border:0;cursor:pointer;color:inherit}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.vr{color:var(--verm)}
+/* grain */
+body::after{
+content:""; position:fixed; inset:-50%; z-index:90; pointer-events:none; opacity:.05;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+animation:grain 7s steps(10) infinite;
+}
+@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,3%)}}
+/* ---------- cursor ---------- */
+.cursor{position:fixed;z-index:99;top:0;left:0;width:8px;height:8px;border-radius:50%;
+background:var(--verm);pointer-events:none;transform:translate(-50%,-50%);
+transition:width .3s var(--ease),height .3s var(--ease),opacity .3s}
+.cursor.is-link{width:42px;height:42px;background:transparent;border:1px solid var(--verm)}
+@media(pointer:coarse){.cursor{display:none}}
+/* ---------- veil ---------- */
+.veil{position:fixed;inset:0;z-index:80;background:var(--ink);
+display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.veil .mono{color:rgba(251,243,236,.55)}
+.veil .mark{font-family:var(--arch);font-weight:900;font-size:clamp(20px,3vw,30px);
+letter-spacing:.04em;color:var(--bone)}
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;
+justify-content:space-between;padding:18px 3.2vw;mix-blend-mode:difference;color:#fff}
+nav .wordmark{font-weight:900;font-size:15px;letter-spacing:.05em;
+font-variation-settings:'wght' 900;transition:font-variation-settings .5s var(--ease)}
+nav .wordmark:hover{font-variation-settings:'wght' 100}
+nav .links{display:flex;gap:30px;align-items:center}
+nav .links a{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+position:relative}
+nav .links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;
+background:currentColor;transition:width .35s var(--ease)}
+nav .links a:hover::after{width:100%}
+nav .buy{border:1px solid currentColor;padding:9px 18px;font-family:var(--mono);
+font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+@media(max-width:760px){nav .links a:not(.buy){display:none}}
+/* ---------- scenes (pin rig) ---------- */
+section{position:relative}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.scene-tag{position:absolute;right:3.2vw;bottom:18px;z-index:5;
+font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:inherit;opacity:.4;text-transform:uppercase}
+/* ---------- 02 hero ---------- */
+.hero{height:100vh;height:100svh;position:relative;display:flex;flex-direction:column;
+justify-content:center;padding:0 3.2vw;background:var(--bone)}
+.reg-v,.reg-h{position:absolute;background:var(--hair-ink);z-index:1}
+.reg-v{top:0;bottom:0;width:1px;left:50%;transform-origin:top;transform:scaleY(0)}
+.reg-h{left:0;right:0;height:1px;top:50%;transform-origin:left;transform:scaleX(0)}
+.reg-cross{position:absolute;right:3.2vw;top:96px;width:26px;height:26px;opacity:0}
+.reg-cross::before,.reg-cross::after{content:"";position:absolute;background:var(--ink)}
+.reg-cross::before{left:50%;top:0;bottom:0;width:1px}
+.reg-cross::after{top:50%;left:0;right:0;height:1px}
+.hero-title{position:relative;z-index:2;line-height:.86;user-select:none}
+.hero-title .row{display:block;overflow:hidden}
+.hero-title .row > span{display:inline-block;transform:translateY(115%)}
+.hero-title .ch{display:inline-block;font-weight:900;
+font-size:clamp(64px,12.4vw,196px);letter-spacing:-.035em;
+font-variation-settings:'wght' 900,'wdth' 100}
+.hero-title .row.thin .ch{font-variation-settings:'wght' 100,'wdth' 100}
+.hero-meta{position:absolute;right:3.2vw;bottom:41vh;z-index:2;text-align:right;
+font-family:var(--mono);font-size:11px;letter-spacing:.14em;line-height:2.1;
+text-transform:uppercase;color:rgba(74,35,40,.62)}
+.hero-meta b{color:var(--ink);font-weight:500}
+.hero-kicker{position:absolute;left:3.2vw;top:96px;z-index:2}
+.hero-cue{position:absolute;left:3.2vw;bottom:18px;z-index:2;opacity:.75;
+color:rgba(251,243,236,.85);animation:cue 2.6s infinite}
+@keyframes cue{50%{opacity:.15}}
+.hero-sub{margin-top:4vh;max-width:430px;font-size:15px;line-height:1.6;
+color:rgba(74,35,40,.82);z-index:2;position:relative;
+opacity:0;transform:translateY(20px)}
+.hero-bed{position:absolute;left:0;right:0;bottom:0;height:44vh;z-index:1;margin:0;
+overflow:hidden;opacity:0}
+.hero-bed img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;
+filter:grayscale(1) contrast(1.06) brightness(1.08);mix-blend-mode:multiply}
+/* the dissolve is a painted bone gradient ON TOP of the image (an alpha mask on
+the figure dropped out whenever the img got its own compositor layer) */
+.hero-bed::after{content:"";position:absolute;inset:0;pointer-events:none;
+background:radial-gradient(62% 80% at 22% 22%,rgba(251,243,236,.96) 0%,rgba(251,243,236,.78) 42%,rgba(251,243,236,0) 76%),
+linear-gradient(180deg,var(--bone) 0,rgba(251,243,236,.88) 16%,rgba(251,243,236,.42) 44%,rgba(251,243,236,0) 74%)}
+.hero-bed figcaption{position:absolute;right:3.2vw;bottom:14px;z-index:3;
+color:rgba(251,243,236,.6);font-family:var(--mono);font-size:10px;
+letter-spacing:.18em;text-transform:uppercase}
+@media(max-width:760px){.hero-bed{height:26vh}}
+/* ---------- 03 ribbons ---------- */
+.ribbons{border-top:1px solid var(--hair-ink);border-bottom:1px solid var(--hair-ink);
+padding:10px 0;background:var(--bone);overflow:clip}
+.ribbon{white-space:nowrap;will-change:transform}
+.ribbon span{display:inline-block;font-size:clamp(28px,4.4vw,58px);letter-spacing:.02em;
+padding-right:3vw;line-height:1.25}
+.ribbon.r1 span{font-variation-settings:'wght' 900,'wdth' 100}
+.ribbon.r2 span{font-variation-settings:'wght' 150,'wdth' 100;color:transparent;
+-webkit-text-stroke:1px rgba(74,35,40,.6)}
+/* ---------- 04 portal ---------- */
+#portal{height:300vh;background:var(--ink)} /* ink behind the unpin: seamless into the manifesto */
+#portal .stage{display:flex;align-items:center;justify-content:center;background:var(--bone)}
+#portal .stage.inked{background:var(--ink)}
+.o-wrap{position:relative;z-index:2;line-height:1}
+.o-glyph{font-weight:900;font-size:64vmin;line-height:1;display:block;
+font-variation-settings:'wght' 900;color:var(--ink)}
+/* the O is scrubbed via font-size (not transform scale) so the glyph
+re-rasterizes every frame and stays a crisp vector at any size */
+.inked .o-glyph{color:var(--ink)} /* stroke fills frame while ink flips behind */
+.portal-line{position:absolute;z-index:3;left:50%;top:42%;transform:translate(-50%,-50%);
+color:var(--bone);opacity:0;font-family:var(--mono);font-size:12px;letter-spacing:.22em;
+text-transform:uppercase;white-space:nowrap}
+.shards{position:absolute;inset:0;z-index:2;pointer-events:none;color:var(--bone)}
+.shard{position:absolute;font-weight:900;opacity:.16;will-change:transform;line-height:1}
+.shard.s-deep{font-size:9vmin;opacity:.10}
+.shard.s-mid{font-size:16vmin;opacity:.14}
+.shard.s-near{font-size:26vmin;opacity:.2}
+.portal-eyebrow{position:absolute;left:3.2vw;top:96px;z-index:3;opacity:.55}
+/* ---------- 05 manifesto (pinned: words ink in under your eyes) ---------- */
+#manifesto{height:230vh;background:var(--ink)}
+.manifesto{background:var(--ink);color:var(--bone);display:flex;align-items:center;
+padding:0 3.2vw;
+-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent 100%);
+mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.manifesto .inner{max-width:1080px;margin:0 auto;position:relative;z-index:2}
+.manifesto p{font-size:clamp(22px,min(4.2vw,6.8vh),58px);line-height:1.16;font-weight:700;
+letter-spacing:-.02em}
+.manifesto p .w{opacity:.14;display:inline-block;transition:opacity .4s linear}
+.manifesto p .w.on{opacity:1}
+.manifesto .mono{display:block;margin-bottom:5vh;color:rgba(251,243,236,.5)}
+.mani-shard{position:absolute;font-weight:900;color:rgba(251,243,236,.05);z-index:1;
+font-size:34vmin;line-height:1;will-change:transform}
+/* ---------- 06 weight axis ---------- */
+#axis{height:280vh;background:var(--ink)}
+#axis .stage{background:var(--ink);color:var(--bone);display:flex;align-items:center;justify-content:center}
+.axis-rule{position:absolute;left:6vw;right:6vw;height:1px;background:var(--hair-bone)}
+.axis-rule small{position:absolute;right:0;top:-18px;font-family:var(--mono);font-size:10px;
+letter-spacing:.2em;color:rgba(251,243,236,.4);text-transform:uppercase}
+.zero-mask{overflow:hidden;line-height:.92}
+#zeroWord{display:block;font-size:clamp(120px,24vw,360px);letter-spacing:-.02em;
+font-variation-settings:'wght' 100;will-change:transform;transform:translateY(115%)}
+.axis-hud{position:absolute;left:6vw;bottom:9vh;opacity:0}
+.axis-rail{position:relative;width:min(300px,30vw);height:1px;background:var(--hair-bone);margin-bottom:14px}
+.axis-rail i{position:absolute;top:-3px;width:1px;height:7px;background:rgba(251,243,236,.4)}
+#railTick{position:absolute;top:-6px;width:2px;height:13px;background:var(--verm)}
+.axis-read{display:flex;gap:14px;align-items:baseline;font-family:var(--mono);
+text-transform:uppercase;letter-spacing:.16em}
+#wghtNum{font-size:13px;color:var(--bone)}
+#wghtName{font-size:11px;color:rgba(251,243,236,.55)}
+#wghtName.stamped{animation:stamp .4s var(--ease)}
+@keyframes stamp{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:none}}
+/* ---------- 07 tester ---------- */
+.tester{background:var(--bone);padding:16vh 3.2vw;position:relative}
+.tester .head{display:flex;justify-content:space-between;align-items:baseline;
+border-bottom:1px solid var(--hair-ink);padding-bottom:18px;margin-bottom:7vh}
+.tester h2,.features h2,.inuse h2,.license h2{font-weight:900;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.02em}
+#testerLine{display:block;width:100%;border:0;outline:none;background:transparent;color:var(--ink);
+font-family:var(--arch);line-height:1.04;min-height:1.2em;white-space:pre-wrap;word-break:break-word;
+caret-color:var(--verm)}
+#testerLine:empty::before{content:"Type something true";color:rgba(74,35,40,.25)}
+.tester-controls{display:grid;grid-template-columns:repeat(3,minmax(180px,1fr)) auto;gap:4vw;
+margin-top:8vh;border-top:1px solid var(--hair-ink);padding-top:26px;align-items:center}
+.ctl label{display:flex;justify-content:space-between;margin-bottom:12px;
+font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(74,35,40,.6)}
+.ctl label b{color:var(--ink);font-weight:500}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:1px;background:var(--hair-ink);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;
+border-radius:50%;background:var(--verm);cursor:pointer;border:0}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--verm);cursor:pointer;border:0}
+.presets{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.presets button{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+padding:6px 12px;border:1px solid var(--hair-ink);transition:.25s var(--ease)}
+.presets button:hover,.presets button.on{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+@media(max-width:900px){.tester-controls{grid-template-columns:1fr 1fr;gap:26px}}
+/* ---------- 08 features ---------- */
+.features{background:var(--bone);padding:4vh 3.2vw 16vh}
+.feat-row{display:grid;grid-template-columns:60px 1fr 1.1fr;gap:3vw;align-items:center;
+border-top:1px solid var(--hair-ink);padding:34px 0;cursor:default}
+.feat-row:last-child{border-bottom:1px solid var(--hair-ink)}
+.feat-row .idx{font-family:var(--mono);font-size:11px;color:rgba(74,35,40,.45);letter-spacing:.14em}
+.feat-row h3{font-weight:700;font-size:clamp(18px,2.2vw,28px);letter-spacing:-.01em}
+.feat-row .demo{font-size:clamp(22px,3vw,40px);text-align:right;white-space:nowrap;overflow:hidden;
+font-variation-settings:'wght' 500;color:rgba(74,35,40,.84);transition:color .3s}
+.feat-row:hover .demo{color:var(--verm)}
+.feat-row .demo .tnum{font-variant-numeric:tabular-nums}
+@media(max-width:760px){.feat-row{grid-template-columns:40px 1fr}.feat-row .demo{grid-column:1/-1;text-align:left}}
+/* ---------- 09 in use (horizontal) ---------- */
+#inuse{background:var(--bone)}
+#inuse .head{padding:10vh 3.2vw 6vh;display:flex;justify-content:space-between;align-items:baseline}
+.h-pin{height:auto}
+.track{display:flex;gap:3vw;padding:0 3.2vw;align-items:center;height:74vh;will-change:transform;width:max-content}
+.frame{position:relative;height:62vh;flex:none;overflow:hidden;background:#f2d6d0}
+.frame.w-a{width:44vw}.frame.w-b{width:30vw}.frame.w-c{width:24vw}
+@media(max-width:760px){.frame.w-a{width:78vw}.frame.w-b{width:64vw}.frame.w-c{width:56vw}}
+.frame img{width:112%;height:112%;object-fit:cover;filter:grayscale(.25) contrast(1.04);will-change:transform}
+.frame .cap{position:absolute;left:14px;bottom:12px;z-index:2;color:#fff;
+font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.frame .num{position:absolute;right:14px;top:12px;z-index:2;color:var(--verm);
+font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+.frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.38));pointer-events:none}
+/* ---------- 10 interlude ---------- */
+.interlude{position:relative;height:120vh;overflow:clip;background:var(--ink)}
+.interlude img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover;
+filter:grayscale(.85) contrast(1.06) brightness(.62);will-change:transform}
+.interlude::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+background:linear-gradient(180deg,rgba(0,0,0,.30),rgba(0,0,0,.58) 36%,rgba(0,0,0,.58) 66%,rgba(0,0,0,.32));}
+.interlude .knock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+z-index:2;mix-blend-mode:difference;color:#fff;text-align:center;line-height:.92}
+.interlude .knock span{display:block;font-weight:900;font-size:clamp(48px,10vw,150px);letter-spacing:-.03em}
+/* upgrade: the photograph at full strength INSIDE the letterforms, dimmed outside */
+@supports (-webkit-background-clip:text){
+.interlude .knock{mix-blend-mode:normal}
+/* bg + clip live ON each span: clip:text on an ancestor does not paint through
+transformed children in Chromium, and the reveal transforms the spans */
+.interlude .knock .fill span{
+background-image:url("../images.unsplash.com/photo-1471890701797-59336a877de4__q39cf22cc.avif");
+background-size:cover;
+-webkit-background-clip:text;background-clip:text;
+color:transparent;
+}
+.interlude .knock .fill span:nth-child(1){background-position:50% 42%}
+.interlude .knock .fill span:nth-child(2){background-position:50% 54%}
+}
+.interlude .credit{position:absolute;right:3.2vw;bottom:16px;z-index:3;color:rgba(255,255,255,.5)}
+/* ---------- 11 ledger + glyphs ---------- */
+.ledger{background:var(--ink);color:var(--bone);padding:18vh 3.2vw}
+.ledger .grid2{display:grid;grid-template-columns:1fr 1.2fr;gap:6vw;max-width:1500px;margin:0 auto}
+@media(max-width:900px){.ledger .grid2{grid-template-columns:1fr}}
+.ledger h2{font-weight:900;font-size:clamp(26px,3.4vw,44px);letter-spacing:-.02em;margin-bottom:6vh}
+.led-row{display:flex;justify-content:space-between;align-items:baseline;
+border-bottom:1px solid var(--hair-bone);padding:16px 2px}
+.led-row .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+color:rgba(251,243,236,.55)}
+.led-row .v{font-variant-numeric:tabular-nums;font-weight:700;font-size:clamp(18px,2vw,26px)}
+.glyphs{display:grid;grid-template-columns:repeat(8,1fr);border:1px solid var(--hair-bone)}
+@media(max-width:760px){.glyphs{grid-template-columns:repeat(5,1fr)}}
+.glyph{aspect-ratio:1;display:grid;place-items:center;border-right:1px solid var(--hair-bone);
+border-bottom:1px solid var(--hair-bone);font-size:clamp(18px,2.4vw,34px);font-weight:500;
+font-variation-settings:'wght' 500;transition:background .25s var(--ease),color .25s var(--ease),font-variation-settings .35s var(--ease);
+opacity:0;transform:scale(.8)}
+.glyph:hover{background:var(--bone);color:var(--ink);font-variation-settings:'wght' 900}
+/* ---------- 12 license ---------- */
+.license{background:var(--bone);padding:16vh 3.2vw}
+.license .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7vh}
+.lic-row{display:grid;grid-template-columns:1fr clamp(110px,12vw,180px) clamp(150px,14vw,200px);gap:3vw;align-items:center;
+border-top:1px solid var(--hair-ink);padding:38px 0;position:relative;cursor:pointer;
+transition:padding-left .4s var(--ease)}
+.lic-row:last-of-type{border-bottom:1px solid var(--hair-ink)}
+.lic-row:hover{padding-left:18px}
+.lic-row::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:var(--verm);
+transition:width .5s var(--ease)}
+.lic-row:hover::before{width:100%}
+.lic-row h3{font-weight:900;font-size:clamp(24px,3.4vw,46px);letter-spacing:-.02em}
+.lic-row p{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+color:rgba(74,35,40,.5);margin-top:8px}
+.lic-row .price{font-variant-numeric:tabular-nums;font-weight:700;font-size:clamp(20px,2.6vw,34px);
+justify-self:end;text-align:right}
+.lic-row .go{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+display:flex;align-items:center;gap:10px;justify-self:end}
+.lic-row .go i{font-style:normal;transition:transform .35s var(--ease)}
+.lic-row:hover .go i{transform:translateX(8px)}
+.lic-note{margin-top:5vh;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+text-transform:uppercase;color:rgba(74,35,40,.45)}
+/* ---------- 13 footer ---------- */
+main{position:relative;z-index:2;background:var(--bone)}
+footer{position:sticky;bottom:0;z-index:1;background:#2e1519;color:var(--bone);
+padding:10vh 3.2vw 4vh;min-height:74vh;display:flex;flex-direction:column;justify-content:space-between;
+overflow:clip}
+.foot-zero{position:absolute;right:-5vw;bottom:-24vh;z-index:0;pointer-events:none;user-select:none;
+font-weight:900;font-size:96vh;line-height:1;color:transparent;
+-webkit-text-stroke:1.5px rgba(251,243,236,.09);will-change:transform}
+footer > div{position:relative;z-index:1}
+.foot-mark{font-weight:900;font-size:clamp(48px,10.4vw,156px);letter-spacing:-.035em;line-height:.9;
+user-select:none;white-space:nowrap}
+.foot-mark .fch{display:inline-block;font-variation-settings:'wght' 900}
+.foot-cta{margin:5vh 0 0;display:inline-flex;align-items:center;gap:16px;
+font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+border:1px solid rgba(251,243,236,.4);padding:16px 26px;width:max-content;
+transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.foot-cta:hover{background:var(--verm);border-color:var(--verm);color:var(--bone)}
+.foot-cols{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+border-top:1px solid rgba(251,243,236,.18);padding-top:22px;
+font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+color:rgba(251,243,236,.75);line-height:2}
+.foot-cross{position:absolute;right:3.2vw;top:10vh;width:30px;height:30px;opacity:.6}
+.foot-cross::before,.foot-cross::after{content:"";position:absolute;background:var(--verm)}
+.foot-cross::before{left:50%;top:0;bottom:0;width:1px}
+.foot-cross::after{top:50%;left:0;right:0;height:1px}
+/* reduced motion: everything lands in final state */
+@media(prefers-reduced-motion:reduce){
+.veil{display:none}
+.hero-title .row > span{transform:none}
+.reg-v{transform:scaleY(1)}.reg-h{transform:scaleX(1)}.reg-cross{opacity:1}
+.hero-sub{opacity:1;transform:none}
+#zeroWord{transform:none;font-variation-settings:'wght' 500}
+.hero-bed{opacity:1}
+.axis-hud{opacity:1}
+.manifesto p .w{opacity:1}
+.glyph{opacity:1;transform:none}
+body::after{animation:none}
+}
+
+/* ---------- design-system adaptation (catalog) ----------
+   1. The hero title now reads GROTESK ZERO / DESIGN SYSTEM: the same two rows (black, then
+      hairline) and the same per-glyph spans, at a size that keeps each longer row on one line and
+      clear of the right-hand spec block (source: clamp(64px,12.4vw,196px)); 11vw below 761px so
+      the black row fits a 360-390px phone. The rows never wrap mid-word.
+   2. 390px: the spec block (.hero-meta) sat on top of the lead paragraph; below 761px it moves up
+      under the registration cross, clear of the title and the lead.
+   3. 390px: the license rows' three fixed columns (1fr + 110px + 150px) outgrew a phone and the
+      last column ("… →") was clipped; below 561px the action drops under the title and price.
+   4. 390px: the footer wordmark's 48px floor made GROTESK ZERO wider than a phone and the footer
+      clipped its last letter; below 761px it follows 10.4vw all the way down. */
+.hero-title .row{white-space:nowrap}
+.hero-title .ch{font-size:clamp(44px,9.4vw,146px)}
+@media(max-width:760px){.hero-title .ch{font-size:11vw}.hero-meta{bottom:auto;top:132px}}
+@media(max-width:560px){.lic-row{grid-template-columns:minmax(0,1fr) auto;row-gap:14px}.lic-row .go{grid-column:1/-1;justify-self:start}}
+@media(max-width:760px){.foot-mark{font-size:10.4vw}}
